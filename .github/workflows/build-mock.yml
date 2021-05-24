@@ -7,12 +7,10 @@ jobs:
   setup-build-gremlin-srv:
     name: Build gremlin-srv
     runs-on: ubuntu-latest
-    env:
-      imageModule: gremlinSrv
 
     steps:
       - name: Build started
-        uses: feecompass/action-google-chat-message
+        uses: feecompass/action-google-chat-message@main
         with:
           message: "test build started"
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
@@ -28,7 +26,7 @@ jobs:
     steps:
       # Notify on chat built failed
       - name: Success message
-        uses: feecompass/action-google-chat-message
+        uses: feecompass/action-google-chat-message@main
         with:
           message: "test build succeeded"
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
