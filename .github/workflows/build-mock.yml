@@ -1,0 +1,34 @@
+name: Build feeCOMPASS apps
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-build-gremlin-srv:
+    name: Build gremlin-srv
+    runs-on: ubuntu-latest
+    env:
+      imageModule: gremlinSrv
+
+    steps:
+      - name: Build started
+        uses: julb/action-post-googlechat-message@v1
+        with:
+          message: "test build started"
+          gchat_webhook_url: ${{ secrets.CHAT_WEBHOOK_URL }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+
+  notify-build-success:
+    name: Notify build failure
+    runs-on: ubuntu-latest
+    if: success()
+    needs: [ setup-build-gremlin-srv ]
+    steps:
+      # Notify on chat built failed
+      - name: Success message
+        uses: julb/action-post-googlechat-message@v1
+        with:
+          message: "test build succeeded"
+          gchat_webhook_url: ${{ secrets.CHAT_WEBHOOK_URL }}
