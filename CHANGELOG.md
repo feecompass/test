@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/feecompass/test/compare/v1.3.2...v1.4.0) (2021-05-24)
+
+
+### Features
+
+* test release info ([74db455](https://www.github.com/feecompass/test/commit/74db45556a718b628abde6e37efa193aa53b18ca))
+
 ### [1.3.2](https://www.github.com/feecompass/test/compare/v1.3.1...v1.3.2) (2021-05-24)
 
 
