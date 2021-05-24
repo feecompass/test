@@ -17,4 +17,5 @@ jobs:
         with:
           workflow: Build feeCOMPASS apps
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          inputs: '{ "version": "${{ steps.release.outputs.tag_name }}" }'
         if: ${{ steps.release.outputs.release_created }}

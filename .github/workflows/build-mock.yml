@@ -2,7 +2,11 @@ name: Build feeCOMPASS apps
 
 on:
   workflow_dispatch:
-
+    release_version: 
+    inputs:
+      release-version:
+        description: 'release beiing built'
+        required: true
 jobs:
   setup-build-gremlin-srv:
     name: Build gremlin-srv
@@ -10,23 +14,23 @@ jobs:
 
     steps:
       - name: Build started
-        uses: feecompass/action-google-chat-message@main
+        uses: feecompass/action-google-chat-message@v1.0.0
         with:
-          message: "test build started"
+          message: "test build started of release ${{ github.event.inputs.release-version }}"
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
       - name: Checkout
         uses: actions/checkout@v2
       
 
   notify-build-success:
-    name: Notify build failure
+    name: Notify build success
     runs-on: ubuntu-latest
     if: success()
     needs: [ setup-build-gremlin-srv ]
     steps:
-      # Notify on chat built failed
+      # Notify on chat built success
       - name: Success message
-        uses: feecompass/action-google-chat-message@main
+        uses: feecompass/action-google-chat-message@v1.0.0
         with:
-          message: "test build succeeded"
+          message: "test build succeeded of release ${{ github.event.inputs.release-version }}"
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
