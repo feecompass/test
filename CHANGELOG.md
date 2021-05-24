@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/feecompass/test/compare/v1.2.1...v1.2.2) (2021-05-24)
+
+
+### Bug Fixes
+
+* **build:** workflow message ([5d3892e](https://www.github.com/feecompass/test/commit/5d3892eb80693182ad6f8e78aafee55508e09aa6))
+
 ### [1.2.1](https://www.github.com/feecompass/test/compare/v1.2.0...v1.2.1) (2021-05-24)
 
 
