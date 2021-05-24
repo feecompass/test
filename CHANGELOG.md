@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/feecompass/test/compare/v1.2.2...v1.3.0) (2021-05-24)
+
+
+### Features
+
+* version number passed ([0c5f728](https://www.github.com/feecompass/test/commit/0c5f72814c100105e754328cf0632d9872e2baf0))
+
 ### [1.2.2](https://www.github.com/feecompass/test/compare/v1.2.1...v1.2.2) (2021-05-24)
 
 
