@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.2](https://www.github.com/feecompass/test/compare/v1.3.1...v1.3.2) (2021-05-24)
+
+
+### Bug Fixes
+
+* test build failure ([3eefe3c](https://www.github.com/feecompass/test/commit/3eefe3c0e5354196ee337ac7de32d58dcd266519))
+
 ### [1.3.1](https://www.github.com/feecompass/test/compare/v1.3.0...v1.3.1) (2021-05-24)
 
 
