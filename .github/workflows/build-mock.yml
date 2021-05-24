@@ -19,7 +19,9 @@ jobs:
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
       - name: Checkout
         uses: actions/checkout@v2
-      
+      - name:
+        run: |-
+          exit 1
 
   notify-build-success:
     name: Notify build success
@@ -31,5 +33,18 @@ jobs:
       - name: Success message
         uses: feecompass/action-google-chat-message@v1.0.0
         with:
-          message: "test build succeeded of release ${{ github.event.inputs.version }}"
+          message: "SUCCESS: test build of release ${{ github.event.inputs.version }}"
+          url: ${{ secrets.CHAT_WEBHOOK_URL }}
+
+  notify-build-failure:
+    name: Notify build failure
+    runs-on: ubuntu-latest
+    if: failure()
+    needs: [ setup-build-gremlin-srv ]
+    steps:
+      # Notify on chat built success
+      - name: Success message
+        uses: feecompass/action-google-chat-message@v1.0.0
+        with:
+          message: "FAILURE: test build of release ${{ github.event.inputs.version }}"
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
