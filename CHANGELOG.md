@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/feecompass/test/compare/v1.3.0...v1.3.1) (2021-05-24)
+
+
+### Bug Fixes
+
+* fixed input name ([a63c8e5](https://www.github.com/feecompass/test/commit/a63c8e59bc5e950c4a3e95d5031187b5a2f76f4f))
+
 ## [1.3.0](https://www.github.com/feecompass/test/compare/v1.2.2...v1.3.0) (2021-05-24)
 
 
