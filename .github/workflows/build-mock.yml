@@ -2,9 +2,8 @@ name: Build feeCOMPASS apps
 
 on:
   workflow_dispatch:
-    release_version: 
     inputs:
-      release-version:
+      version:
         description: 'release beiing built'
         required: true
 jobs:
@@ -16,7 +15,7 @@ jobs:
       - name: Build started
         uses: feecompass/action-google-chat-message@v1.0.0
         with:
-          message: "test build started of release ${{ github.event.inputs.release-version }}"
+          message: "test build started of release ${{ github.event.inputs.version }}"
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
       - name: Checkout
         uses: actions/checkout@v2
@@ -32,5 +31,5 @@ jobs:
       - name: Success message
         uses: feecompass/action-google-chat-message@v1.0.0
         with:
-          message: "test build succeeded of release ${{ github.event.inputs.release-version }}"
+          message: "test build succeeded of release ${{ github.event.inputs.version }}"
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
