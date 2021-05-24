@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Build started
-        uses: julb/action-post-googlechat-message@v1
+        uses: feecompass/action-google-chat-message
         with:
           message: "test build started"
-          gchat_webhook_url: ${{ secrets.CHAT_WEBHOOK_URL }}
+          url: ${{ secrets.CHAT_WEBHOOK_URL }}
       - name: Checkout
         uses: actions/checkout@v2
       
@@ -28,7 +28,7 @@ jobs:
     steps:
       # Notify on chat built failed
       - name: Success message
-        uses: julb/action-post-googlechat-message@v1
+        uses: feecompass/action-google-chat-message
         with:
           message: "test build succeeded"
-          gchat_webhook_url: ${{ secrets.CHAT_WEBHOOK_URL }}
+          url: ${{ secrets.CHAT_WEBHOOK_URL }}
