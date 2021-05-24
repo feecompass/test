@@ -12,10 +12,20 @@ jobs:
         with:
           release-type: simple
           package-name: release-please-action
-      - name: Trigger build-feecompass workflow
-        uses: benc-uk/workflow-dispatch@v1
+
+      - uses: octokit/request-action@v2.x
+        id: get_latest_release
         with:
-          workflow: Build feeCOMPASS apps
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          inputs: '{ "version": "${{ steps.release.outputs.tag_name }}" }'
+          route: GET /repos/{owner}/{repo}/releases/latest
+          owner: feecompass
+          repo: feecompass-app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Show body
+        uses: feecompass/action-google-chat-message@v1.0.0
+        with:
+          message: "${{ fromJson(steps.get_latest_release.outputs.data).body }}"
+          url: ${{ secrets.CHAT_WEBHOOK_URL }}
         if: ${{ steps.release.outputs.release_created }}

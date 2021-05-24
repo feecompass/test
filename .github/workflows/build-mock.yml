@@ -4,47 +4,49 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'release beiing built'
+        description: 'release being built'
         required: true
+
 jobs:
   setup-build-gremlin-srv:
     name: Build gremlin-srv
     runs-on: ubuntu-latest
 
     steps:
-      - name: Build started
-        uses: feecompass/action-google-chat-message@v1.0.0
-        with:
-          message: "test build started of release ${{ github.event.inputs.version }}"
-          url: ${{ secrets.CHAT_WEBHOOK_URL }}
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name:
-        run: |-
-          exit 1
+      # - name: Build started
+      #   uses: feecompass/action-google-chat-message@v1.0.0
+      #   with:
+      #     message: "test build started of release ${{ github.event.inputs.version }}"
+      #     url: ${{ secrets.CHAT_WEBHOOK_URL }}
 
-  notify-build-success:
-    name: Notify build success
-    runs-on: ubuntu-latest
-    if: success()
-    needs: [ setup-build-gremlin-srv ]
-    steps:
-      # Notify on chat built success
-      - name: Success message
+      # - name: Checkout
+      #   uses: actions/checkout@v2
+      #   path: main
+
+      - uses: octokit/request-action@v2.x
+        id: get_latest_release
+        with:
+          route: GET /repos/{owner}/{repo}/releases/latest
+          owner: feecompass
+          repo: feecompass-app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Show body
         uses: feecompass/action-google-chat-message@v1.0.0
         with:
-          message: "SUCCESS: test build of release ${{ github.event.inputs.version }}"
+          message: "${{ fromJson(steps.get_latest_release.outputs.data).body }}"
           url: ${{ secrets.CHAT_WEBHOOK_URL }}
 
-  notify-build-failure:
-    name: Notify build failure
-    runs-on: ubuntu-latest
-    if: failure()
-    needs: [ setup-build-gremlin-srv ]
-    steps:
-      # Notify on chat built success
-      - name: Success message
-        uses: feecompass/action-google-chat-message@v1.0.0
-        with:
-          message: "FAILURE: test build of release ${{ github.event.inputs.version }}"
-          url: ${{ secrets.CHAT_WEBHOOK_URL }}
+
+      # # Setup gcloud CLI
+      # - uses: google-github-actions/setup-gcloud@v0.2.0
+      #   with:
+      #     service_account_key: ${{ secrets.GCR_SA_KEY }}
+      #     project_id: ${{ secrets.GKE_PROJECT }}
+
+      # # Copy changelog to storage
+      # - uses: google-github-actions/upload-cloud-storage@main
+      #   with:
+      #     path: ./CHANGELOG.html
+      #     destination: feecompass-general/builds/CHANGELOG.md
